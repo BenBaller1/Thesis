@@ -1,0 +1,47 @@
+{
+	"base_domain": "doh.softsec.science",
+	"gateway_ip": "10.100.0.1",
+	
+	"query_type": "A",
+	"samples_per_mode": 50,
+
+	"query_timeout_seconds": 5,
+	"ping_count": 10,
+	"ping_timeout_seconds": 1,
+
+	"auth_user_pass_file": "/home/benballer/Thesis/openvpn_config/pass.txt",
+	"ovpn_dir": "/home/benballer/Thesis/openvpn_config/ovpn_udp",
+	"output_dir": "/home/benballer/Thesis/measurements/results",
+	
+	"protocols": {
+		"do53": {
+			"server": "94.140.14.140",
+			"port": 53,
+			"extra_args": []
+		},
+		"dot": {
+			"server": "94.140.14.140",
+			"port": 853,
+			"extra_args": [
+				"+tls",
+				"+tls-hostname=unfiltered.adguard-dns.com"
+			]
+		},
+		"doh": {
+			"server": "94.140.14.140",
+			"port": 443,
+			"extra_args": [
+				"+https=/dns-query",
+				"+tls-hostname=unfiltered.adguard-dns.com"
+			]
+		},
+		"doq": {
+			"server": "94.140.14.140",
+			"port": 853,
+			"extra_args": [
+				"+quic",
+				"+tls-hostname=unfiltered.adguard-dns.com"
+			]
+		}
+	}
+}

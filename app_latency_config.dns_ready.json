@@ -1,0 +1,131 @@
+{
+  "base_dir": ".",
+  "output_dir": "/home/benballer/Thesis/measurements/app_latency_results",
+  "auth_user_pass_file": "/home/benballer/Thesis/openvpn_config/pass.txt",
+  "ovpn_dir": "/home/benballer/Thesis/openvpn_config/ovpn_udp",
+  "openvpn_command": [
+    "sudo",
+    "openvpn"
+  ],
+  "gateway_ip": "10.100.0.1",
+  "ping_binary": "ping",
+  "curl_binary": "curl",
+  "retry_count": 2,
+  "cool_down_seconds": 2.0,
+  "tunnel_ready_timeout_seconds": 120.0,
+  "ping_count": 10,
+  "ping_timeout_seconds": 1.0,
+  "export_csv": false,
+  "random_seed": 42,
+  "repetitions_per_vantage": 1,
+  "protocols_per_run": [
+    "do53",
+    "doq",
+    "doh",
+    "dot"
+  ],
+  "app_idle_gap_seconds": 15.0,
+  "apps": [
+    {
+      "name": "FLIXBUS",
+      "package": "de.flixbus.app",
+      "launch_activity": ".Main",
+      "launch_action": null,
+      "launch_category": null,
+      "launch_extra_args": [],
+      "clear_data": false,
+      "force_stop_before_launch": false,
+      "launch_timeout_seconds": 30.0,
+      "ready_timeout_seconds": 120.0
+    },
+    {
+      "name": "LETTERBOXD",
+      "package": "com.letterboxd.letterboxd",
+      "launch_activity": ".MainActivity",
+      "launch_action": null,
+      "launch_category": null,
+      "launch_extra_args": [],
+      "clear_data": false,
+      "force_stop_before_launch": false,
+      "launch_timeout_seconds": 30.0,
+      "ready_timeout_seconds": 120.0
+    },
+    {
+      "name": "ZEIT",
+      "package": "de.zeit.online",
+      "launch_activity": "com.prepublic.zeitonline.ui.mainscreens.home.presentation.HomeActivity",
+      "launch_action": null,
+      "launch_category": null,
+      "launch_extra_args": [],
+      "clear_data": false,
+      "force_stop_before_launch": false,
+      "launch_timeout_seconds": 30.0,
+      "ready_timeout_seconds": 120.0
+    },
+    {
+      "name": "FIREFOX",
+      "package": "org.mozilla.firefox",
+      "launch_activity": ".App",
+      "launch_action": null,
+      "launch_category": null,
+      "launch_extra_args": [],
+      "clear_data": false,
+      "force_stop_before_launch": false,
+      "launch_timeout_seconds": 30.0,
+      "ready_timeout_seconds": 120.0
+    }
+  ],
+  "emulator": {
+    "avd_name": "Pixel8-AOSP",
+    "emulator_binary": "emulator",
+    "adb_binary": "adb",
+    "wipe_data": false,
+    "no_snapshot_load": false,
+    "no_snapshot_save": true,
+    "dns_server": "127.0.0.1,::1",
+    "extra_args": [
+      "-snapshot",
+      "measurement2.2"
+    ],
+    "boot_timeout_seconds": 300.0,
+    "adb_timeout_seconds": 120.0
+  },
+  "dnsproxy": {
+    "binary": "dnsproxy",
+    "listen_ip": "127.0.0.1",
+    "listen_port": 53,
+    "command_template": [
+      "sudo",
+      "dnsproxy",
+      "-l",
+      "127.0.0.1",
+      "-l",
+      "::1",
+      "-p",
+      "53",
+      "-u",
+      "{upstream}",
+      "-verbose"
+    ],
+    "log_level": "info",
+    "log_file": null,
+    "log_regex": null,
+    "event_regex": null
+  },
+  "protocols": {
+    "do53": {
+      "upstream": "9.9.9.9",
+      "port": 53,
+      "extra_args": []
+    },
+    "dot": {
+      "upstream": "tls://dns.quad9.net"
+    },
+    "doh": {
+      "upstream": "https://dns.quad9.net/dns-query"
+    },
+    "doq": {
+      "upstream": "quic://dns.quad9.net"
+    }
+  }
+}
